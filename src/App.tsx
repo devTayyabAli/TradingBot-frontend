@@ -125,7 +125,7 @@ const App: React.FC = () => {
 
   const configureEmail = async () => {
     try {
-      const res = await axios.post(api.emailConfigure(), emailConfig);
+      await axios.post(api.emailConfigure(), emailConfig);
       alert('Email configured successfully!');
       fetchEmailStatus();
       setShowEmailConfig(false);
@@ -136,7 +136,7 @@ const App: React.FC = () => {
 
   const testEmail = async () => {
     try {
-      const res = await axios.post(api.emailTest());
+      await axios.post(api.emailTest());
       alert('Test email sent successfully!');
     } catch (err: any) {
       alert('Failed to send test email: ' + (err.response?.data?.detail || err.message));

@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, History, Settings, LogOut, TrendingUp, Cpu, Activity, Zap } from 'lucide-react';
+import { LayoutDashboard, History, Settings, LogOut, Zap } from 'lucide-react';
 
 interface SidebarProps {
   currentAsset: string;
