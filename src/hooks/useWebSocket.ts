@@ -16,7 +16,7 @@ export const useWebSocket = (url?: string) => {
 
       ws.onopen = () => {
         setIsConnected(true);
-        console.log('WS Connected');
+        console.log('WS Connected - Status updated to true');
       };
 
       ws.onmessage = (event) => {
@@ -33,7 +33,7 @@ export const useWebSocket = (url?: string) => {
 
       ws.onclose = () => {
         setIsConnected(false);
-        console.log('WS Disconnected, reconnecting...');
+        console.log('WS Disconnected - Status updated to false, reconnecting...');
         setTimeout(connect, 3000);
       };
 
