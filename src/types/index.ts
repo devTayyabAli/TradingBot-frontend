@@ -33,6 +33,11 @@ export interface Signal {
   enhanced_confidence?: number;
   is_ai_enhanced?: boolean;
   ai_timestamp?: string;
+  // Advanced AI Fields
+  models_used?: string[];
+  ensemble_details?: Record<string, string>;
+  model_type?: string;
+  risk_score?: number;
 }
 
 // HistoryItem now reflects what SignalTracker saves to signals.json

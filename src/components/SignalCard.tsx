@@ -62,6 +62,13 @@ const SignalCard: React.FC<SignalCardProps> = ({ signal, loading }) => {
             </div>
           )}
           
+          {/* Advanced AI Model Type */}
+          {signal.model_type && (
+            <div className="text-white/60 text-xs uppercase tracking-widest">
+              {signal.model_type}
+            </div>
+          )}
+          
           {/* Neon Accuracy Bar */}
           <div className="w-48 h-1 bg-white/5 rounded-full overflow-hidden">
             <div 
@@ -87,6 +94,25 @@ const SignalCard: React.FC<SignalCardProps> = ({ signal, loading }) => {
           <div className="mt-6 p-4 bg-white/5 rounded-2xl border border-white/5">
             <p className="text-accent text-[10px] font-black uppercase tracking-widest mb-2">AI Analysis</p>
             <p className="text-white/60 text-xs leading-relaxed">{signal.ai_analysis}</p>
+            
+            {/* Models Used */}
+            {signal.models_used && signal.models_used.length > 0 && (
+              <div className="mt-3">
+                <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">AI Models Used</p>
+                <div className="flex flex-wrap gap-1">
+                  {signal.models_used.slice(0, 6).map((model, index) => (
+                    <span key={index} className="text-[10px] px-2 py-1 bg-white/10 text-white/80 rounded-full">
+                      {model}
+                    </span>
+                  ))}
+                  {signal.models_used.length > 6 && (
+                    <span className="text-[10px] px-2 py-1 bg-white/10 text-white/60 rounded-full">
+                      +{signal.models_used.length - 6} more
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
             
             {signal.ai_key_factors && signal.ai_key_factors.length > 0 && (
               <div className="mt-3">
