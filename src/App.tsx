@@ -27,7 +27,7 @@ import {
 const App: React.FC = () => {
   const [currentAsset, setCurrentAsset] = useState('EURUSD_otc');
   const [currentTimeframe, setCurrentTimeframe] = useState('1m');
-  const { isConnected } = useWebSocket(undefined);
+  const { isConnected } = useWebSocket();
   const [manualSignal, setManualSignal] = useState<Signal | null>(null);
   const [loading, setLoading] = useState(false);
   const [stats, setStats] = useState<AccuracyStats | null>(null);

@@ -1,14 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import type { Signal } from '../types';
-import { api } from '../api';
 
-export const useWebSocket = (url?: string) => {
-  // Use API WebSocket URL or fallback to provided URL
-  const wsUrl = url || api.websocket;
-  
-  const [lastSignal, setLastSignal] = useState<Signal | null>(null);
-  const [isConnected, setIsConnected] = useState(true); // Always true for Railway compatibility
-  const socketRef = useRef<WebSocket | null>(null);
+export const useWebSocket = () => {
+  const [lastSignal] = useState<Signal | null>(null);
+  const [isConnected] = useState(true); // Always true for Railway compatibility
 
   useEffect(() => {
     // Disable WebSocket for Railway compatibility
