@@ -52,7 +52,7 @@ export const useWebSocket = (url?: string) => {
         socketRef.current.close();
       }
     };
-  }, [url]);
+  }, []); // Remove url dependency to prevent reconnections
 
   return { lastSignal, isConnected };
 };
