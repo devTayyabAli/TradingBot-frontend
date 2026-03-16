@@ -1,6 +1,4 @@
-const API_BASE_URL = import.meta.env.PROD 
-  ? 'https://tradingbot-production-cd27.up.railway.app' 
-  : 'http://127.0.0.1:8000';
+const API_BASE_URL = 'https://tradingbot-production-cd27.up.railway.app';
 
 export const api = {
   signal: (asset: string, timeframe: string) => 
@@ -14,7 +12,5 @@ export const api = {
     `${API_BASE_URL}/api/chart?asset=${asset}&timeframe=${timeframe}`,
   history: () => `${API_BASE_URL}/api/history`,
   assets: () => `${API_BASE_URL}/api/assets`,
-  websocket: import.meta.env.PROD 
-    ? 'wss://tradingbot-production-cd27.up.railway.app/ws'
-    : 'ws://127.0.0.1:8000/ws'
+  websocket: 'wss://tradingbot-production-cd27.up.railway.app/ws'
 };
