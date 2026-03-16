@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import type { Signal } from '../types';
+import { api } from '../api';
 
 export const useWebSocket = (url?: string) => {
-  // Default to backend port 8000, overrideable via env var
-  const wsUrl = url || `ws://127.0.0.1:8000/ws`;
+  // Use API WebSocket URL or fallback to provided URL
+  const wsUrl = url || api.websocket;
   
   const [lastSignal, setLastSignal] = useState<Signal | null>(null);
   const [isConnected, setIsConnected] = useState(false);
