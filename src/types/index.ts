@@ -20,6 +20,19 @@ export interface Signal {
     stoch_k: number;
     stoch_d: number;
   };
+  // AI Enhanced Fields
+  ai_analysis?: string;
+  ai_risk_score?: number;
+  ai_stop_loss?: number;
+  ai_take_profit?: number;
+  ai_sentiment?: string;
+  ai_key_factors?: string[];
+  ai_risks?: string[];
+  ai_recommendation?: 'STRONG BUY' | 'BUY' | 'HOLD' | 'SELL' | 'STRONG SELL';
+  ai_confidence_boost?: number;
+  enhanced_confidence?: number;
+  is_ai_enhanced?: boolean;
+  ai_timestamp?: string;
 }
 
 // HistoryItem now reflects what SignalTracker saves to signals.json

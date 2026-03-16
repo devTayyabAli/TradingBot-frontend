@@ -51,8 +51,16 @@ const SignalCard: React.FC<SignalCardProps> = ({ signal, loading }) => {
 
         <div className="flex flex-col items-center gap-3 mb-10">
           <p className="text-white/40 text-xs font-black uppercase tracking-widest">
-            {signal.strength} STRENGTH <span className="mx-2 opacity-20">|</span> {signal.confidence}% Accuracy
+            {signal.strength} STRENGTH <span className="mx-2 opacity-20">|</span> {signal.enhanced_confidence || signal.confidence}% Accuracy
+            {signal.is_ai_enhanced && <span className="ml-2 text-accent">AI Enhanced</span>}
           </p>
+          
+          {/* AI Recommendation */}
+          {signal.ai_recommendation && (
+            <div className="text-accent text-xs font-bold uppercase tracking-widest">
+              {signal.ai_recommendation}
+            </div>
+          )}
           
           {/* Neon Accuracy Bar */}
           <div className="w-48 h-1 bg-white/5 rounded-full overflow-hidden">
@@ -73,6 +81,27 @@ const SignalCard: React.FC<SignalCardProps> = ({ signal, loading }) => {
             <p className="text-2xl font-mono font-black text-white/90">{signal.risk_reward}</p>
           </div>
         </div>
+        
+        {/* AI Analysis Section */}
+        {signal.ai_analysis && (
+          <div className="mt-6 p-4 bg-white/5 rounded-2xl border border-white/5">
+            <p className="text-accent text-[10px] font-black uppercase tracking-widest mb-2">AI Analysis</p>
+            <p className="text-white/60 text-xs leading-relaxed">{signal.ai_analysis}</p>
+            
+            {signal.ai_key_factors && signal.ai_key_factors.length > 0 && (
+              <div className="mt-3">
+                <p className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">Key Factors</p>
+                <div className="flex flex-wrap gap-1">
+                  {signal.ai_key_factors.map((factor, index) => (
+                    <span key={index} className="text-[10px] px-2 py-1 bg-accent/20 text-accent rounded-full">
+                      {factor}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

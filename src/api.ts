@@ -12,5 +12,6 @@ export const api = {
     `${API_BASE_URL}/api/chart?asset=${asset}&timeframe=${timeframe}`,
   history: () => `${API_BASE_URL}/api/history`,
   assets: () => `${API_BASE_URL}/api/assets`,
+  sentiment: (asset: string) => `${API_BASE_URL}/api/sentiment/${asset}`,
   websocket: 'wss://tradingbot-production-cd27.up.railway.app/ws'
 };
