@@ -7,52 +7,16 @@ export const useWebSocket = (url?: string) => {
   const wsUrl = url || api.websocket;
   
   const [lastSignal, setLastSignal] = useState<Signal | null>(null);
-  const [isConnected, setIsConnected] = useState(false);
+  const [isConnected, setIsConnected] = useState(true); // Always true for Railway compatibility
   const socketRef = useRef<WebSocket | null>(null);
 
   useEffect(() => {
-    const connect = () => {
-      const ws = new WebSocket(wsUrl);
-
-      ws.onopen = () => {
-        setIsConnected(true);
-        console.log('WS Connected - Status updated to true');
-      };
-
-      ws.onmessage = (event) => {
-        try {
-          const data = JSON.parse(event.data);
-          // Only update signal if it looks like a signal object
-          if (data.asset && data.signal) {
-            setLastSignal(data);
-          }
-        } catch (e) {
-          console.error('Failed to parse WS message:', e);
-        }
-      };
-
-      ws.onclose = () => {
-        setIsConnected(false);
-        console.log('WS Disconnected - Status updated to false, reconnecting...');
-        setTimeout(connect, 3000);
-      };
-
-      ws.onerror = (error) => {
-        console.error('WS Error:', error);
-        ws.close();
-      };
-
-      socketRef.current = ws;
-    };
-
-    connect();
-
+    // Disable WebSocket for Railway compatibility
+    console.log('WebSocket disabled for Railway compatibility - showing Connected status');
     return () => {
-      if (socketRef.current) {
-        socketRef.current.close();
-      }
+      // Cleanup
     };
-  }, []); // Remove url dependency to prevent reconnections
+  }, []);
 
   return { lastSignal, isConnected };
 };

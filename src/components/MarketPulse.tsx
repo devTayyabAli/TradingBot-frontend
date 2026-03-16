@@ -23,20 +23,25 @@ export const MarketPulse: React.FC<MarketPulseProps> = ({ asset, timeframe }) =>
                 const data = res.data;
                 seriesRef.current.setData(data);
                 
-                const current = data[data.length - 1].value;
-                const previous = data[0].value;
-                const diff = ((current - previous) / previous) * 100;
+                const lastCandle = data[data.length - 1];
+                const firstCandle = data[0];
                 
-                setLastPrice(current);
-                setChange(Number(diff.toFixed(2)));
-                
-                // Adjust base value to the start of the visible range for visual effect
-                seriesRef.current.applyOptions({
-                    baseValue: { type: 'price', price: previous }
-                });
+                if (lastCandle && firstCandle && lastCandle.value && firstCandle.value) {
+                    const current = lastCandle.value;
+                    const previous = firstCandle.value;
+                    const diff = ((current - previous) / previous) * 100;
+                    
+                    setLastPrice(current);
+                    setChange(Number(diff.toFixed(2)));
+                    
+                    // Adjust base value to the start of the visible range for visual effect
+                    seriesRef.current.applyOptions({
+                        baseValue: { type: 'price', price: previous }
+                    });
 
-                if (chartRef.current) {
-                    chartRef.current.timeScale().fitContent();
+                    if (chartRef.current) {
+                        chartRef.current.timeScale().fitContent();
+                    }
                 }
             }
         } catch (err) {
