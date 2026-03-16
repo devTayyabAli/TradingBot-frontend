@@ -13,5 +13,6 @@ export const api = {
   history: () => `${API_BASE_URL}/api/history`,
   assets: () => `${API_BASE_URL}/api/assets`,
   sentiment: (asset: string) => `${API_BASE_URL}/api/sentiment/${asset}`,
+  accuracy90: () => `${API_BASE_URL}/api/accuracy-90`,
   websocket: 'wss://tradingbot-production-cd27.up.railway.app/ws'
 };
