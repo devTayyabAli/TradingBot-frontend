@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createChart, ColorType, BaselineSeries } from 'lightweight-charts';
 import type { ISeriesApi } from 'lightweight-charts';
 import axios from 'axios';
+import { api } from '../api';
 
 interface MarketPulseProps {
     asset: string;
@@ -17,7 +18,7 @@ export const MarketPulse: React.FC<MarketPulseProps> = ({ asset, timeframe }) =>
 
     const fetchData = async () => {
         try {
-            const res = await axios.get(`http://127.0.0.1:8000/api/chart?asset=${asset}&timeframe=${timeframe}`);
+            const res = await axios.get(api.chart(asset, timeframe));
             if (seriesRef.current && res.data.length > 0) {
                 const data = res.data;
                 seriesRef.current.setData(data);
